@@ -46,7 +46,10 @@ int main()
     print_first(p->value);
     printf("\n");
     print_last(r->value);
-    
+    printf("\n");
+    deleteNode(&head,1);
+
+
     return 0;
 }
 node*temp;
@@ -115,4 +118,36 @@ int isEmpty( node * head )
  {
      printf("The last value is : %d", x->value);
  }
- 
+ void deleteNode(struct Node **head, int key)
+{
+
+    struct Node* temp = *head, *prev;
+
+
+    if (temp != NULL && temp->value == key)
+    {
+        *head = temp->next;
+        free(temp);
+        return;
+    }
+
+
+    while (temp != NULL && temp->value != key)
+    {
+        prev = temp;
+        temp = temp->next;
+        if(temp==NULL)
+        {
+            printf("Not Found\n");
+            return;
+        }
+    }
+
+
+    if (temp == NULL) return;
+
+
+    prev->next = temp->next;
+
+    free(temp);
+}
