@@ -1,3 +1,4 @@
+
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -24,6 +25,8 @@ int main()
 
     r->value = 7;
     r->next = NULL;
+    printf("Count of nodes is %d", getCount(head));
+    printf("\n");
     printf("Before delete: ");
     print(head);
     delete_first_value(head);
@@ -37,12 +40,22 @@ int main()
     delete_last_value(head);
     print(head);
     printf("\n");
-    deleteNode(&head, 1);
-
-
+    //deleteNode(&head, 1);
+    isEmpty(head);
+    printf("\n");
+    print_first(p->value);
+    printf("\n");
+    print_last(r->value);
+    
     return 0;
 }
-
+node*temp;
+void delete_first_value(node*x)
+{
+    temp=head;
+    head=head->next;
+    free(temp);
+}
 void print(node *x)
 {
     if(x==NULL)
@@ -55,31 +68,51 @@ void print(node *x)
         x=x->next;
     }
 }
-node*temp;
-void delete_first_value(node*x)
-{
-    temp=head;
-    head=head->next;
-    free(temp);
-}
-node*temp;node*second_last;
 void delete_last_value(node*x)
 {
-    temp=head;
-    second_last=head;
-    while(temp->next != NULL)
-        {
-            second_last = temp;
-            temp = temp->next;
-        }
-
-        if(temp == head)
-        {
-            head = NULL;
-        }
-        else
-        {
-            second_last->next = NULL;
-        }
+node*temp=head;
+ if(head==NULL)
+ {
+     printf("Underflow");
+     return;
+ }
+ while(temp->next->next)
+ {
+     temp=temp->next;
+ }
+ free(temp->next);
+ temp->next=NULL;
 
 }
+int getCount(struct node* head)
+{
+    int count = 0;
+    struct Node* current = head;
+    while (current != NULL)
+    {
+        count++;
+        current = current->next;
+    }
+    return count;
+}
+int isEmpty( node * head )
+ {
+   if( !head )
+      {
+          printf("Linked List is Not Empty");
+      }
+      else
+      {
+          printf("Linked list is empty");
+      }
+
+ }
+ void print_first(node *x)
+ {
+     printf("The first value is : %d", x->value);
+ }
+ void print_last(node*x)
+ {
+     printf("The last value is : %d", x->value);
+ }
+ 
