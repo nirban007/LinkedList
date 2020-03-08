@@ -12,6 +12,7 @@ void delete_pos();
 void search();
 void deleteList();
 int getCount();
+void search_item();
 
 
 struct node
@@ -25,6 +26,7 @@ int main()
 {
     int key;
         int choice;
+        int value;
         while(1){
 
                 printf("\n                MENU                             \n");
@@ -38,8 +40,9 @@ int main()
                 printf("\n 8.Delete from specified position     \n");
                 printf("\n 9.Delete all elements     \n");
                 printf("\n 10.Size of Linked List    \n");
-                printf("\n 11.Exit \n");
-                printf("\n--------------------------------------\n");
+                printf("\n 11.Search \n");
+                printf("\n 12.Exit \n");
+                printf("\n----------------------------\n");
                 printf("Enter your choice:\t");
                 scanf("%d",&choice);
                 switch(choice)
@@ -77,8 +80,14 @@ int main()
                                         getCount(head);
                                         break;
                         case 11:
+                                        printf("Enter the value you want to search: ");
+                                        scanf("%d",&value);
+                                        search_item();
+                                        break;
+                        case 12:
                                         exit(0);
                                         break;
+
 
                         default:
                                         printf("\n Wrong Choice:\n");
@@ -316,5 +325,26 @@ int getCount(struct node* head)
 
     // count is 1 + count of remaining list
     return 1 + getCount(head->next);
+}
+void search_item(int value)
+{
+    struct node *searchnode = head;
+    int flag = 0;
+
+    while(searchnode!=NULL)
+    {
+        if(searchnode->info==value)
+        {
+            printf("%d is present in this list. Memory address is %d\n", value, searchnode);
+            flag = 1;
+            break;
+        }
+        else
+            searchnode = searchnode->next;
+    }
+
+    if(flag==0)
+        printf("Item not found\n");
+
 }
 
