@@ -30,11 +30,11 @@ int main()
         while(1){
 
                 printf("\n                MENU                             \n");
-                printf("\n 1.Create Linked List    \n");
+                printf("\n 1.Create Linkd List    \n");
                 printf("\n 2.Display    \n");
                 printf("\n 3.Insert at the beginning    \n");
                 printf("\n 4.Insert at the end  \n");
-                printf("\n 5.Insert at specified position       \n");
+                printf("\n 5.Insert at specified postion       \n");
                 printf("\n 6.Delete from beginning      \n");
                 printf("\n 7.Delete from the end        \n");
                 printf("\n 8.Delete from specified position     \n");
