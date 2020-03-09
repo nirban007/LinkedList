@@ -1,108 +1,83 @@
 
-#include <stdio.h>
-#include <stdlib.h>
+#include<stdio.h>
+#include<process.h>
+#include<stdlib.h>
 
+#define MAX 5
 
-struct stack
+int top=-1,stack[MAX];
+void push();
+void pop();
+void display();
+
+void main()
 {
-	int maxsize;
-	int top;
-	int *items;
-};
+	int ch;
 
-
-struct stack* newStack(int capacity)
-{
-	struct stack *pt = (struct stack*)malloc(sizeof(struct stack));
-
-	pt->maxsize = capacity;
-	pt->top = -1;
-	pt->items = (int*)malloc(sizeof(int) * capacity);
-
-	return pt;
-}
-
-int size(struct stack *pt)
-{
-	return pt->top + 1;
-}
-
-
-int isEmpty(struct stack *pt)
-{
-	return pt->top == -1;
-}
-
-
-int isFull(struct stack *pt)
-{
-	return pt->top == pt->maxsize - 1;
-}
-
-
-void push(struct stack *pt, int x)
-{
-
-
-	if (isFull(pt))
+	while(1)
 	{
-		printf("OverFlow\nProgram Terminated\n");
-		exit(EXIT_FAILURE);
+		printf("\nStack Menu ");
+		printf("\n\n1.Push\n2.Pop\n3.Display\n4.Exit");
+		printf("\n\nEnter your choice:");
+		scanf("%d",&ch);
+
+		switch(ch)
+		{
+			case 1: push();
+					break;
+			case 2: pop();
+					break;
+			case 3: display();
+					break;
+			case 4: exit(0);
+
+			default: printf("\nWrong Choice!!");
+		}
 	}
-
-	printf("Inserting %d\n", x);
-
-
-	pt->items[++pt->top] = x;
 }
 
-
-int peek(struct stack *pt)
+void push()
 {
+	int val;
 
-	if (!isEmpty(pt))
-		return pt->items[pt->top];
-	else
-		exit(EXIT_FAILURE);
-}
-
-
-int pop(struct stack *pt)
-{
-
-	if (isEmpty(pt))
+	if(top==MAX-1)
 	{
-		printf("UnderFlow\nProgram Terminated\n");
-		exit(EXIT_FAILURE);
+		printf("\nStack is full!!");
 	}
-
-	printf("Removing %d\n", peek(pt));
-
-
-	return pt->items[pt->top--];
+	else
+	{
+		printf("\nEnter element to push:");
+		scanf("%d",&val);
+		top=top+1;
+		stack[top]=val;
+	}
 }
 
-
-int main()
+void pop()
 {
-
-	struct stack *pt = newStack(5);
-
-	push(pt, 1);
-	push(pt, 2);
-	push(pt, 3);
-
-	printf("Top element is %d\n", peek(pt));
-	printf("Stack size is %d\n", size(pt));
-
-	pop(pt);
-	pop(pt);
-	pop(pt);
-
-	if (isEmpty(pt))
-		printf("Stack is empty");
+	if(top==-1)
+	{
+		printf("\nStack is empty!!");
+	}
 	else
-		printf("Stack is not empty");
+	{
+		printf("\nDeleted element is %d",stack[top]);
+		top=top-1;
+	}
+}
 
-	return 0;
+void display()
+{
+	int i;
+
+	if(top==-1)
+	{
+		printf("\nStack is empty!!");
+	}
+	else
+	{
+		printf("\nStack is...\n");
+		for(i=top;i>=0;--i)
+			printf("%d\n",stack[i]);
+	}
 }
